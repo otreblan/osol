@@ -29,7 +29,7 @@ void aru::args::parse(int argc, char** argv) noexcept
 
 	int c;
 
-	while((c = getopt_long(argc, argv, "D:h", options, nullptr)) != -1)
+	while((c = getopt_long(argc, argv, "-D:h", options, nullptr)) != -1)
 	{
 		switch(c)
 		{
@@ -41,22 +41,17 @@ void aru::args::parse(int argc, char** argv) noexcept
 				usage(EXIT_SUCCESS);
 				break;
 
+			case 1:
+				operations.push_back(optarg);
+				break;
+
 			default:
 				exit(EXIT_FAILURE);
 				break;
 		}
 	}
 
-	if(optind < argc)
-	{
-		operations.reserve(argc - optind);
-
-		while(optind < argc)
-		{
-			operations.push_back(argv[optind++]);
-		}
-	}
-	else
+	if(operations.empty())
 	{
 		usage(EXIT_FAILURE);
 	}
