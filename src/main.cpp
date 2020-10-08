@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
 	args.parse(argc, argv);
 
-	for(const auto str: args.expresions)
+	for(const auto str: args.operations)
 	{
 		std::cout << str << '\n';
 	}

@@ -32,7 +32,7 @@ struct args
 	/// argv must exist after parsing, otherwise expresions wont work.
 	void parse(int argc, char** argv) noexcept;
 
-	std::vector<std::string_view> expresions;
+	std::vector<std::string_view> operations;
 
 	std::unordered_map<std::string, int> variables;
 

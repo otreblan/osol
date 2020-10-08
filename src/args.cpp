@@ -49,11 +49,11 @@ void aru::args::parse(int argc, char** argv) noexcept
 
 	if(optind < argc)
 	{
-		expresions.reserve(argc - optind);
+		operations.reserve(argc - optind);
 
 		while(optind < argc)
 		{
-			expresions.push_back(argv[optind++]);
+			operations.push_back(argv[optind++]);
 		}
 	}
 	else
