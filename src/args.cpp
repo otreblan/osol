@@ -19,13 +19,13 @@
 
 #include <args.hpp>
 
-void aru::args::parse(int argc, char** argv) noexcept
+int aru::args::parse(int argc, char** argv) noexcept
 {
 	this->argc = argc;
 	this->argv = argv;
 
 	if(argc < 2)
-		usage(EXIT_FAILURE);
+		return usage(EXIT_FAILURE);
 
 	int c;
 
@@ -38,7 +38,7 @@ void aru::args::parse(int argc, char** argv) noexcept
 				break;
 
 			case 'h':
-				usage(EXIT_SUCCESS);
+				return usage(EXIT_SUCCESS);
 				break;
 
 			case 1:
@@ -46,18 +46,20 @@ void aru::args::parse(int argc, char** argv) noexcept
 				break;
 
 			default:
-				exit(EXIT_FAILURE);
+				return EXIT_FAILURE;
 				break;
 		}
 	}
 
 	if(operations.empty())
 	{
-		usage(EXIT_FAILURE);
+		return usage(EXIT_FAILURE);
 	}
+
+	return EXIT_SUCCESS;
 }
 
-void aru::args::usage(int exit_code) const noexcept
+int aru::args::usage(int exit_code) const noexcept
 {
 	printf(
 		"Usage: %s [-Dkey=value]... -- operation...\n"
@@ -69,7 +71,7 @@ void aru::args::usage(int exit_code) const noexcept
 		argv[0]
 	);
 
-	exit(exit_code);
+	return exit_code;
 }
 
 void aru::args::parse_key_value(const char* key_value) noexcept

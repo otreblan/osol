@@ -19,9 +19,10 @@
 #include <getopt.h>
 #include <unistd.h>
 
-#include <vector>
+#include <string>
 #include <string_view>
 #include <unordered_map>
+#include <vector>
 
 namespace aru
 {
@@ -30,7 +31,7 @@ struct args
 {
 	/// Parses the command line arguments.
 	/// argv must exist after parsing, otherwise expresions wont work.
-	void parse(int argc, char** argv) noexcept;
+	int parse(int argc, char** argv) noexcept;
 
 	std::vector<std::string_view> operations;
 
@@ -40,7 +41,7 @@ private:
 	int argc;
 	char** argv;
 
-	void usage(int exit_code) const noexcept;
+	int usage(int exit_code) const noexcept;
 
 	void parse_key_value(const char* key_value) noexcept;
 

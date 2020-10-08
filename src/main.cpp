@@ -14,24 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with osol.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <iostream>
 #include <args.hpp>
 
 int main(int argc, char *argv[])
 {
 	aru::args args;
 
-	args.parse(argc, argv);
-
-	for(const auto str: args.operations)
-	{
-		std::cout << str << '\n';
-	}
-
-	for(const auto& [key, value]: args.variables)
-	{
-		std::cout << key << ' ' << value << '\n';
-	}
-
-	return 0;
+	return args.parse(argc, argv);
 }
