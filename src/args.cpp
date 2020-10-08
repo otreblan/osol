@@ -57,6 +57,10 @@ void aru::args::parse(int argc, char** argv) noexcept
 			expresions.push_back(argv[optind++]);
 		}
 	}
+	else
+	{
+		usage(EXIT_FAILURE);
+	}
 }
 
 void aru::args::usage(int exit_code) const noexcept
