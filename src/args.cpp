@@ -42,7 +42,6 @@ void aru::args::parse(int argc, char** argv) noexcept
 				break;
 
 			default:
-				fprintf(stderr, "%s: %o\n", argv[0], c);
 				exit(EXIT_FAILURE);
 				break;
 		}
@@ -66,7 +65,7 @@ void aru::args::parse(int argc, char** argv) noexcept
 void aru::args::usage(int exit_code) const noexcept
 {
 	printf(
-		"Usage: %s [-Dkey=value]... operation...\n"
+		"Usage: %s [-Dkey=value]... -- operation...\n"
 		"Expands the keys and solves the operations.\n"
 		"\n"
 		"Arguments:\n"
