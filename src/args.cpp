@@ -74,7 +74,6 @@ void aru::args::usage(int exit_code) const noexcept
 
 void aru::args::parse_key_value(const char* key_value) noexcept
 {
-
 	char* name = nullptr;
 	int value;
 
@@ -86,7 +85,10 @@ void aru::args::parse_key_value(const char* key_value) noexcept
 	}
 
 	if(errno != 0)
-		perror(argv[0]); errno = 0;
+	{
+		perror(argv[0]);
+		exit(EXIT_FAILURE);
+	}
 
 	variables[name] = value;
 
