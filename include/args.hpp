@@ -14,24 +14,37 @@
 // You should have received a copy of the GNU General Public License
 // along with osol.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <iostream>
-#include <args.hpp>
+#include <getopt.h>
+#include <unistd.h>
 
-int main(int argc, char *argv[])
+#include <vector>
+#include <string_view>
+#include <unordered_map>
+
+namespace aru
 {
-	aru::args args;
 
-	args.parse(argc, argv);
+struct args
+{
+	/// Parses the command line arguments.
+	/// argv must exist after parsing, otherwise expresions wont work.
+	void parse(int argc, char** argv) noexcept;
 
-	for(const auto str: args.expresions)
+	std::vector<std::string_view> expresions;
+
+	std::unordered_map<std::string, int> variables;
+
+private:
+	void usage() const noexcept;
+
+	void parse_key_value(const char* key_value) noexcept;
+
+	static constexpr option options[] =
 	{
-		std::cout << str << '\n';
-	}
+		{"define", required_argument, nullptr, 'D'},
+		{"help",   no_argument,       nullptr, 'h'},
+		{nullptr,  0,                 nullptr, 0}
+	};
+};
 
-	for(const auto& [key, value]: args.variables)
-	{
-		std::cout << key << ' ' << value << '\n';
-	}
-
-	return 0;
-}
+};
