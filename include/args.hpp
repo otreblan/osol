@@ -37,9 +37,12 @@ struct args
 	std::unordered_map<std::string, int> variables;
 
 private:
-	static void usage(const char* argv0, int exit_code) noexcept;
+	int argc;
+	char** argv;
 
-	void parse_key_value(const char* argv0, const char* key_value) noexcept;
+	void usage(int exit_code) const noexcept;
+
+	void parse_key_value(const char* key_value) noexcept;
 
 	static constexpr option options[] =
 	{

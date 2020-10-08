@@ -21,8 +21,11 @@
 
 void aru::args::parse(int argc, char** argv) noexcept
 {
+	this->argc = argc;
+	this->argv = argv;
+
 	if(argc < 2)
-		usage(argv[0], EXIT_FAILURE);
+		usage(EXIT_FAILURE);
 
 	int c;
 
@@ -31,11 +34,11 @@ void aru::args::parse(int argc, char** argv) noexcept
 		switch(c)
 		{
 			case 'D':
-				parse_key_value(argv[0], optarg);
+				parse_key_value(optarg);
 				break;
 
 			case 'h':
-				usage(argv[0], EXIT_SUCCESS);
+				usage(EXIT_SUCCESS);
 				break;
 
 			default:
@@ -56,7 +59,7 @@ void aru::args::parse(int argc, char** argv) noexcept
 	}
 }
 
-void aru::args::usage(const char* argv0, int exit_code) noexcept
+void aru::args::usage(int exit_code) const noexcept
 {
 	printf(
 		"Usage: %s [-Dkey=value]... operation...\n"
@@ -65,13 +68,13 @@ void aru::args::usage(const char* argv0, int exit_code) noexcept
 		"Arguments:\n"
 		"\t-h, --help             Display help.\n"
 		"\t-D, --define key=value Set value to a key.\n",
-		argv0
+		argv[0]
 	);
 
 	exit(exit_code);
 }
 
-void aru::args::parse_key_value(const char* argv0, const char* key_value) noexcept
+void aru::args::parse_key_value(const char* key_value) noexcept
 {
 
 	char* name = nullptr;
@@ -80,12 +83,12 @@ void aru::args::parse_key_value(const char* argv0, const char* key_value) noexce
 	if(isdigit(key_value[0]) ||
 		sscanf(key_value, "%m[^= ]%*[ =]%d", &name, &value) < 2)
 	{
-		fprintf(stderr, "%s: Bad key=value \"%s\"\n", argv0, key_value);
+		fprintf(stderr, "%s: Bad key=value \"%s\"\n", argv[0], key_value);
 		exit(EXIT_FAILURE);
 	}
 
 	if(errno != 0)
-		perror("osol"); errno = 0;
+		perror(argv[0]); errno = 0;
 
 	variables[name] = value;
 
