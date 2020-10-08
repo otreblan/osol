@@ -66,7 +66,7 @@ void aru::args::parse_key_value(const char* key_value) noexcept
 	int value;
 
 	if(isdigit(key_value[0]) ||
-		sscanf(key_value, "%m[^=]%*1[=]%d", &name, &value) < 2)
+		sscanf(key_value, "%*[ ]%m[^= ]%*[ =]%d", &name, &value) < 2)
 	{
 		std::cerr << "osol: Bad key=value " << key_value << '\n';
 		exit(EXIT_FAILURE);
