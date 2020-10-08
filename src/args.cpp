@@ -59,7 +59,7 @@ void aru::args::parse(int argc, char** argv) noexcept
 void aru::args::usage(const char* argv0, int exit_code) noexcept
 {
 	printf(
-		"Usage: %s [-Dkey=value] operation...\n"
+		"Usage: %s [-Dkey=value]... operation...\n"
 		"Expands the keys and solves the operations.\n"
 		"\n"
 		"Arguments:\n"
