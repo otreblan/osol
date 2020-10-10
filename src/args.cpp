@@ -28,6 +28,7 @@ int aru::args::parse(int argc, char** argv) noexcept
 		return usage(EXIT_FAILURE);
 
 	int c;
+	bool has_operation = false;
 
 	while((c = getopt_long(argc, argv, "-D:h", options, nullptr)) != -1)
 	{
@@ -42,7 +43,8 @@ int aru::args::parse(int argc, char** argv) noexcept
 				break;
 
 			case 1:
-				operations.push_back(optarg);
+				tkn.split(optarg);
+				has_operation = true;
 				break;
 
 			default:
@@ -51,7 +53,13 @@ int aru::args::parse(int argc, char** argv) noexcept
 		}
 	}
 
-	if(operations.empty())
+	while(optind < argc)
+	{
+		tkn.split(argv[optind++]);
+		has_operation = true;
+	}
+
+	if(!has_operation)
 	{
 		return usage(EXIT_FAILURE);
 	}

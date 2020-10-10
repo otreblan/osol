@@ -14,33 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with osol.  If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include <tokenizer.hpp>
 
-namespace aru
+void aru::tokenizer::split(char* operation)
 {
-
-enum class token_type
-{
-	CHAR,
-	INT,
-	STRING
-};
-
-struct token
-{
-	token_type type;
-
-	union
-	{
-		char c;
-		int i;
-		char* str_ref;
-	} value;
-
-	explicit token(char c);
-	explicit token(int i);
-	explicit token(char* str_ref);
-
-};
-
-};
+	//TODO
+	tokens.push_back(token{operation});
+}

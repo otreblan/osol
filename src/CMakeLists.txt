@@ -18,4 +18,6 @@ target_sources(${PROJECT_NAME}
 	PRIVATE
 		args.cpp
 		main.cpp
+		token.cpp
+		tokenizer.cpp
 )

@@ -14,33 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with osol.  If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include <token.hpp>
 
-namespace aru
+aru::token::token(char c):
+	type(token_type::CHAR)
 {
+	value.c = c;
+}
 
-enum class token_type
+aru::token::token(int i):
+	type(token_type::INT)
 {
-	CHAR,
-	INT,
-	STRING
-};
+	value.i = i;
+}
 
-struct token
+aru::token::token(char* str_ref):
+	type(token_type::STRING)
 {
-	token_type type;
-
-	union
-	{
-		char c;
-		int i;
-		char* str_ref;
-	} value;
-
-	explicit token(char c);
-	explicit token(int i);
-	explicit token(char* str_ref);
-
-};
-
-};
+	value.str_ref = str_ref;
+}

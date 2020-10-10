@@ -24,6 +24,8 @@
 #include <unordered_map>
 #include <vector>
 
+#include <tokenizer.hpp>
+
 namespace aru
 {
 
@@ -33,7 +35,7 @@ struct args
 	/// argv must exist after parsing, otherwise expresions wont work.
 	int parse(int argc, char** argv) noexcept;
 
-	std::vector<std::string_view> operations;
+	tokenizer tkn;
 
 	std::unordered_map<std::string, int> variables;
 

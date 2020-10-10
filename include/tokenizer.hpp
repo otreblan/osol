@@ -16,31 +16,21 @@
 
 #pragma once
 
+#include <vector>
+
+#include <token.hpp>
+
 namespace aru
 {
 
-enum class token_type
+struct tokenizer
 {
-	CHAR,
-	INT,
-	STRING
-};
+	std::vector<token> tokens;
 
-struct token
-{
-	token_type type;
-
-	union
-	{
-		char c;
-		int i;
-		char* str_ref;
-	} value;
-
-	explicit token(char c);
-	explicit token(int i);
-	explicit token(char* str_ref);
-
+	/// Splits the operation into tokens and puts them into the tokens vector.
+	/// The operation string will be modified, and it must still exist after
+	/// split() returns.
+	void split(char* operation);
 };
 
 };
