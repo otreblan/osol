@@ -37,13 +37,11 @@ aru::tokenizer::state aru::tokenizer::before_operand(char* input)
 	if(!input)
 		raise(SIGSEGV);
 
-	// Unary minus
-	if(input[0] == '-')
-		input[0] = '~';
-
 	switch(input[0])
 	{
-		case '~':
+		case '-':
+			input[0] = '~'; // Unary minus
+			[[fallthrough]];
 		case '(':
 			tokens.push_back(token{input[0]});
 			[[fallthrough]];
