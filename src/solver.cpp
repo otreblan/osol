@@ -121,22 +121,6 @@ std::vector<aru::token> aru::solver::postfixify(std::vector<token>& tokens)
 				break;
 
 			case token_type::STRING:
-			{
-				auto v_it = variables.find(t.value.str_ref);
-
-				if(v_it == variables.end())
-				{
-					fprintf(stderr, "%s: Undefined variable \"%s\"\n",
-						program_invocation_name,
-						t.value.str_ref
-					);
-					return {};
-				}
-
-				postfix.push_back(token{v_it->second});
-				break;
-			}
-
 			case token_type::INT:
 				postfix.push_back(t);
 				break;
