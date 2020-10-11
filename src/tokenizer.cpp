@@ -20,8 +20,12 @@
 
 void aru::tokenizer::split(char* operation)
 {
-	//TODO
-	tokens.push_back(token{operation});
+	state current_state = state::before_operand;
+
+	while(current_state != state::end)
+	{
+		current_state = next_state(operation++, current_state);
+	}
 }
 
 aru::tokenizer::state aru::tokenizer::before_operand(char* input)
@@ -33,7 +37,6 @@ aru::tokenizer::state aru::tokenizer::before_operand(char* input)
 	{
 		default:
 			return state::end;
-			break;
 	}
 }
 
@@ -46,7 +49,6 @@ aru::tokenizer::state aru::tokenizer::begin_variable(char* input)
 	{
 		default:
 			return state::end;
-			break;
 	}
 }
 
@@ -59,7 +61,6 @@ aru::tokenizer::state aru::tokenizer::in_variable(char* input)
 	{
 		default:
 			return state::end;
-			break;
 	}
 }
 
@@ -72,7 +73,6 @@ aru::tokenizer::state aru::tokenizer::begin_literal(char* input)
 	{
 		default:
 			return state::end;
-			break;
 	}
 }
 
@@ -85,7 +85,6 @@ aru::tokenizer::state aru::tokenizer::in_literal(char* input)
 	{
 		default:
 			return state::end;
-			break;
 	}
 }
 
@@ -98,6 +97,21 @@ aru::tokenizer::state aru::tokenizer::before_operator(char* input)
 	{
 		default:
 			return state::end;
-			break;
+	}
+}
+
+aru::tokenizer::state aru::tokenizer::next_state(char* input, state current_state)
+{
+	switch(current_state)
+	{
+		case state::before_operand:  return before_operand(input);
+		case state::begin_variable:  return begin_variable(input);
+		case state::in_variable:     return in_variable(input);
+		case state::begin_literal:   return begin_literal(input);
+		case state::in_literal:      return in_literal(input);
+		case state::before_operator: return before_operator(input);
+
+		default:
+			return state::end;
 	}
 }

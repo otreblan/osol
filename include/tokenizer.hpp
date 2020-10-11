@@ -50,6 +50,8 @@ private:
 	state begin_literal(char* input);
 	state in_literal(char* input);
 	state before_operator(char* input);
+
+	state next_state(char* input, state current_state);
 };
 
 };
