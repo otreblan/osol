@@ -49,9 +49,10 @@ private:
 
 	static constexpr option options[] =
 	{
-		{"define", required_argument, nullptr, 'D'},
-		{"help",   no_argument,       nullptr, 'h'},
-		{nullptr,  0,                 nullptr, 0}
+		{"define",    required_argument, nullptr, 'D'},
+		{"help",      no_argument,       nullptr, 'h'},
+		{"operation", required_argument, nullptr, 'o'},
+		{nullptr,     0,                 nullptr, 0}
 	};
 };
 

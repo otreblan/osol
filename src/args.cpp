@@ -30,7 +30,7 @@ int aru::args::parse(int argc, char** argv) noexcept
 	int c;
 	bool has_operation = false;
 
-	while((c = getopt_long(argc, argv, "-D:h", options, nullptr)) != -1)
+	while((c = getopt_long(argc, argv, "-D:ho:", options, nullptr)) != -1)
 	{
 		switch(c)
 		{
@@ -42,6 +42,7 @@ int aru::args::parse(int argc, char** argv) noexcept
 				return usage(EXIT_SUCCESS);
 				break;
 
+			case 'o':
 			case 1:
 				tkn.split(optarg);
 				has_operation = true;
@@ -86,12 +87,13 @@ int aru::args::parse(int argc, char** argv) noexcept
 int aru::args::usage(int exit_code) const noexcept
 {
 	printf(
-		"Usage: %s [-Dkey=value]... -- operation...\n"
+		"Usage: %s [ [-Dkey=value] | [-o\"operation\"] ]... [--] operation...\n"
 		"Expands the keys and solves the operations.\n"
 		"\n"
 		"Arguments:\n"
-		"\t-h, --help             Display help.\n"
-		"\t-D, --define key=value Set value to a key.\n",
+		"\t-h, --help                  Display help.\n"
+		"\t-D, --define key=value      Set value to a key.\n"
+		"\t-o, --operation \"operation\" Operation to solve.\n",
 		argv[0]
 	);
 
