@@ -41,6 +41,7 @@ struct token
 	explicit token(int i);
 	explicit token(char* str_ref);
 
+	void print();
 };
 
 };

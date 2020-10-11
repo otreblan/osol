@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with osol.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <cstdio>
+
 #include <token.hpp>
 
 aru::token::token(char c):
@@ -32,4 +34,22 @@ aru::token::token(char* str_ref):
 	type(token_type::STRING)
 {
 	value.str_ref = str_ref;
+}
+
+void aru::token::print()
+{
+	switch(type)
+	{
+		case token_type::CHAR:
+			printf("char: %c\n", value.c);
+			break;
+
+		case token_type::INT:
+			printf("int: %d\n", value.i);
+			break;
+
+		case token_type::STRING:
+			printf("string: %s\n", value.str_ref);
+			break;
+	}
 }

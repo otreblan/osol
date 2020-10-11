@@ -58,9 +58,13 @@ int aru::args::parse(int argc, char** argv) noexcept
 		has_operation = true;
 	}
 
-	if(!has_operation || !no_errors)
-	{
+	if(!has_operation)
 		return usage(EXIT_FAILURE);
+
+	if(!no_errors)
+	{
+		fprintf(stderr, "%s: Error while solving.\n", argv[0]);
+		return EXIT_FAILURE;
 	}
 
 	return EXIT_SUCCESS;

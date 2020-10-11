@@ -52,20 +52,7 @@ bool aru::solver::solve(char* operation)
 	tkn.split(operation);
 
 	for(auto i: tkn.tokens)
-	{
-		switch(i.type)
-		{
-			case token_type::CHAR:
-				std::cout << "char: " << i.value.c << '\n';
-				break;
-			case token_type::INT:
-				std::cout << "int: " << i.value.i << '\n';
-				break;
-			case token_type::STRING:
-				std::cout << "string: " << i.value.str_ref << '\n';
-				break;
-		}
-	}
+		i.print();
 
 	std::vector<token> postfix = postfixify(tkn.tokens);
 	if(postfix.empty())
