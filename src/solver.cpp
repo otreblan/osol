@@ -67,10 +67,19 @@ bool aru::solver::solve(char* operation)
 		}
 	}
 
+	std::vector<token> postfix = postfixify(tkn.tokens);
+	if(postfix.empty())
+		return false;
+
+	return true;
+}
+
+std::vector<aru::token> aru::solver::postfixify(std::vector<token>& tokens)
+{
 	std::stack<char> t_stack;
 	std::vector<token> postfix;
 
-	for(auto t: tkn.tokens)
+	for(auto t: tokens)
 	{
 		switch(t.type)
 		{
@@ -95,7 +104,7 @@ bool aru::solver::solve(char* operation)
 				auto v_it = variables.find(t.value.str_ref);
 
 				if(v_it == variables.end())
-					return false;
+					return {};
 
 				postfix.push_back(token{v_it->second});
 				break;
@@ -113,7 +122,7 @@ bool aru::solver::solve(char* operation)
 		t_stack.pop();
 	}
 
-	return true;
+	return postfix;
 }
 
 int aru::solver::precedence(char op)

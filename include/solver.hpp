@@ -16,8 +16,11 @@
 
 #pragma once
 
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
+#include <vector>
+
+#include <token.hpp>
 
 namespace aru
 {
@@ -30,6 +33,7 @@ struct solver
 private:
 	std::unordered_map<std::string, int> variables;
 
+	std::vector<token> postfixify(std::vector<token>& tokens);
 	static int precedence(char op);
 };
 
