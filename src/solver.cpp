@@ -22,6 +22,7 @@
 
 #include <solver.hpp>
 #include <tokenizer.hpp>
+#include <node.hpp>
 
 void aru::solver::parse_key_value(const char* key_value) noexcept
 {
@@ -60,8 +61,12 @@ bool aru::solver::solve(char* operation)
 
 	puts("");
 
-	for(auto i: postfix)
-		i.print();
+	node* root = node::make_node(postfix);
+
+	if(root == nullptr)
+		return false;
+
+	delete root;
 
 	return true;
 }
