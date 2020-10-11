@@ -32,6 +32,8 @@ struct node
 
 	static node* make_node(std::vector<token>& postfix);
 
+	int solve();
+
 private:
 	node(token value);
 };

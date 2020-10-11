@@ -27,6 +27,11 @@ aru::node* aru::node::make_node(std::vector<token>& postfix)
 	return nullptr;
 }
 
+int aru::node::solve()
+{
+	return 0;
+}
+
 aru::node::node(token value):
 	value(value),
 	left(nullptr),

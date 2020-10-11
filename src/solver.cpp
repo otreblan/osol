@@ -66,6 +66,8 @@ bool aru::solver::solve(char* operation)
 	if(root == nullptr)
 		return false;
 
+	printf("%d\n", root->solve());
+
 	delete root;
 
 	return true;
