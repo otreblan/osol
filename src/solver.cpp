@@ -78,6 +78,7 @@ bool aru::solver::solve(char* operation)
 				switch(t.value.c)
 				{
 					ARU_OPERATOR_CASES
+					case '~':
 						break;
 
 					case '(':
@@ -85,9 +86,6 @@ bool aru::solver::solve(char* operation)
 						break;
 
 					case ')':
-						break;
-
-					case '~':
 						break;
 				}
 				break;
@@ -109,6 +107,12 @@ bool aru::solver::solve(char* operation)
 		}
 	}
 
+	while(!t_stack.empty())
+	{
+		postfix.push_back(token{t_stack.top()});
+		t_stack.pop();
+	}
+
 	return true;
 }
 
@@ -116,6 +120,9 @@ int aru::solver::precedence(char op)
 {
 	switch(op)
 	{
+		case '~':
+			return 3;
+
 		case '*':
 		case '/':
 			return 2;
