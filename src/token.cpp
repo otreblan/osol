@@ -41,15 +41,15 @@ void aru::token::print()
 	switch(type)
 	{
 		case token_type::CHAR:
-			printf("char: %c\n", value.c);
+			printf("char:\t%c\n", value.c);
 			break;
 
 		case token_type::INT:
-			printf("int: %d\n", value.i);
+			printf("int:\t%d\n", value.i);
 			break;
 
 		case token_type::STRING:
-			printf("string: %s\n", value.str_ref);
+			printf("string:\t%s\n", value.str_ref);
 			break;
 	}
 }
