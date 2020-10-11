@@ -34,6 +34,8 @@ struct node
 
 	int solve();
 
+	~node();
+
 private:
 	node(token value);
 };

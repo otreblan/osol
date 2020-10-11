@@ -164,6 +164,15 @@ std::vector<aru::token> aru::solver::postfixify(std::vector<token>& tokens)
 	return postfix;
 }
 
+aru::node::~node()
+{
+	if(left != nullptr)
+		delete left;
+
+	if(right != nullptr)
+		delete right;
+}
+
 int aru::solver::precedence(char op)
 {
 	switch(op)
