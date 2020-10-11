@@ -175,7 +175,7 @@ bool aru::tokenizer::parse_literal(token& literal_token)
 
 	if(literal_token.type != token_type::STRING)
 	{
-		fprintf(stderr, "osol: Invalid literal.\n");
+		fprintf(stderr, "%s: Invalid literal.\n", program_invocation_name);
 		return false;
 	}
 
@@ -185,14 +185,15 @@ bool aru::tokenizer::parse_literal(token& literal_token)
 
 	if(errno != 0)
 	{
-		perror("osol");
+		perror(program_invocation_name);
 		return false;
 	}
 
 	if(strlen(endptr) != 0)
 	{
 		fprintf(stderr,
-			"osol: Invalid variable name \"%s\".\n",
+			"%s: Invalid variable name \"%s\".\n",
+			program_invocation_name,
 			literal_token.value.str_ref
 		);
 		return false;

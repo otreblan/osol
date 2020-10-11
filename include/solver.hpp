@@ -16,38 +16,18 @@
 
 #pragma once
 
-#include <getopt.h>
-#include <unistd.h>
-
-#include <string>
-#include <string_view>
 #include <unordered_map>
-#include <vector>
-
-#include <tokenizer.hpp>
-#include <solver.hpp>
+#include <string>
 
 namespace aru
 {
 
-struct args
+struct solver
 {
-	/// Parses the command line arguments.
-	/// argv must exist after parsing, otherwise expresions wont work.
-	int parse(int argc, char** argv) noexcept;
+	std::unordered_map<std::string, int> variables;
 
-	solver o_solver;
-
-private:
-	int usage(int exit_code) const noexcept;
-
-	static constexpr option options[] =
-	{
-		{"define",    required_argument, nullptr, 'D'},
-		{"help",      no_argument,       nullptr, 'h'},
-		{"operation", required_argument, nullptr, 'o'},
-		{nullptr,     0,                 nullptr, 0}
-	};
+	bool solve(char *operation);
+	void parse_key_value(const char* key_value) noexcept;
 };
 
 };
