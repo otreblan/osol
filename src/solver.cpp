@@ -111,3 +111,20 @@ bool aru::solver::solve(char* operation)
 
 	return true;
 }
+
+int aru::solver::precedence(char op)
+{
+	switch(op)
+	{
+		case '*':
+		case '/':
+			return 2;
+
+		case '+':
+		case '-':
+			return 1;
+
+		default:
+			return 0;
+	}
+}

@@ -24,10 +24,13 @@ namespace aru
 
 struct solver
 {
-	std::unordered_map<std::string, int> variables;
-
 	bool solve(char *operation);
 	void parse_key_value(const char* key_value) noexcept;
+
+private:
+	std::unordered_map<std::string, int> variables;
+
+	static int precedence(char op);
 };
 
 };
