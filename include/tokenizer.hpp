@@ -110,7 +110,7 @@ struct tokenizer
 	/// Splits the operation into tokens and puts them into the tokens vector.
 	/// The operation string will be modified, and it must still exist after
 	/// split() returns.
-	void split(char* operation);
+	bool split(char* operation);
 
 private:
 	enum class state

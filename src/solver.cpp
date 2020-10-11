@@ -50,7 +50,8 @@ void aru::solver::parse_key_value(const char* key_value) noexcept
 bool aru::solver::solve(char* operation)
 {
 	tokenizer tkn;
-	tkn.split(operation);
+	if(!tkn.split(operation))
+		return false;
 
 	std::vector<token> postfix = postfixify(tkn.tokens);
 	if(postfix.empty())

@@ -22,7 +22,7 @@
 
 #include <tokenizer.hpp>
 
-void aru::tokenizer::split(char* operation)
+bool aru::tokenizer::split(char* operation)
 {
 	state current_state = state::before_operand;
 
@@ -30,6 +30,15 @@ void aru::tokenizer::split(char* operation)
 	{
 		current_state = next_state(operation++, current_state);
 	}
+	operation--;
+
+	if(*operation != '\0')
+	{
+		fprintf(stderr, "%s: Bad operation.\n", program_invocation_name);
+		return false;
+	}
+
+	return true;
 }
 
 aru::tokenizer::state aru::tokenizer::before_operand(char* input)
