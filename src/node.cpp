@@ -26,7 +26,6 @@ aru::node* aru::node::make_node(std::vector<token>& postfix)
 	std::stack<node*> node_s;
 	for(token t: postfix)
 	{
-		t.print();
 		new_node = new (std::nothrow) node(t);
 
 		if(new_node == nullptr)
@@ -67,9 +66,50 @@ aru::node* aru::node::make_node(std::vector<token>& postfix)
 	return node_s.top();
 }
 
-int aru::node::solve()
+int aru::node::solve(std::unordered_map<std::string, int>& variables)
 {
-	return 0;
+	switch(value.type)
+	{
+		case token_type::CHAR:
+			switch(value.value.c)
+			{
+				case '+':
+					return left->solve(variables) + right->solve(variables);
+
+				case '-':
+					return left->solve(variables) - right->solve(variables);
+
+				case '/':
+					return left->solve(variables) / right->solve(variables);
+
+				case '*':
+					return left->solve(variables) * right->solve(variables);
+
+				case '~':
+					return -(left->solve(variables));
+
+				default:
+					return 0;
+			}
+
+		case token_type::STRING:
+			return variables[value.value.str_ref];
+
+		case token_type::INT:
+			return value.value.i;
+
+		default:
+			return 0;
+	}
+}
+
+aru::node::~node()
+{
+	if(left != nullptr)
+		delete left;
+
+	if(right != nullptr)
+		delete right;
 }
 
 aru::node::node(token value):

@@ -52,21 +52,16 @@ bool aru::solver::solve(char* operation)
 	tokenizer tkn;
 	tkn.split(operation);
 
-	for(auto i: tkn.tokens)
-		i.print();
-
 	std::vector<token> postfix = postfixify(tkn.tokens);
 	if(postfix.empty())
 		return false;
-
-	puts("");
 
 	node* root = node::make_node(postfix);
 
 	if(root == nullptr)
 		return false;
 
-	printf("%d\n", root->solve());
+	printf("%d\n", root->solve(variables));
 
 	delete root;
 
@@ -162,15 +157,6 @@ std::vector<aru::token> aru::solver::postfixify(std::vector<token>& tokens)
 	}
 
 	return postfix;
-}
-
-aru::node::~node()
-{
-	if(left != nullptr)
-		delete left;
-
-	if(right != nullptr)
-		delete right;
 }
 
 int aru::solver::precedence(char op)

@@ -17,6 +17,8 @@
 #pragma once
 
 #include <vector>
+#include <unordered_map>
+#include <string>
 
 #include <token.hpp>
 
@@ -32,11 +34,12 @@ struct node
 
 	static node* make_node(std::vector<token>& postfix);
 
-	int solve();
+	int solve(std::unordered_map<std::string, int>& variables);
 
 	~node();
 
 private:
+
 	node(token value);
 };
 
