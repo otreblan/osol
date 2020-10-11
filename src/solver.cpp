@@ -58,6 +58,11 @@ bool aru::solver::solve(char* operation)
 	if(postfix.empty())
 		return false;
 
+	puts("");
+
+	for(auto i: postfix)
+		i.print();
+
 	return true;
 }
 
@@ -65,6 +70,7 @@ std::vector<aru::token> aru::solver::postfixify(std::vector<token>& tokens)
 {
 	std::stack<char> t_stack;
 	std::vector<token> postfix;
+	int level = 0;
 
 	for(auto t: tokens)
 	{
@@ -75,13 +81,41 @@ std::vector<aru::token> aru::solver::postfixify(std::vector<token>& tokens)
 				{
 					ARU_OPERATOR_CASES
 					case '~':
+						if(t_stack.empty() || t_stack.top() == '(')
+						{
+							t_stack.push(t.value.c);
+							break;
+						}
+						while(!t_stack.empty() &&
+							t_stack.top() != '(' &&
+							precedence(t_stack.top()) >= precedence(t.value.c)
+						)
+						{
+							postfix.push_back(token{t_stack.top()});
+							t_stack.pop();
+						}
+
+						t_stack.push(t.value.c);
+
 						break;
 
 					case '(':
 						t_stack.push(t.value.c);
+						level++;
 						break;
 
 					case ')':
+						while(!t_stack.empty())
+						{
+							if(t_stack.top() == '(')
+							{
+								t_stack.pop();
+								break;
+							}
+							postfix.push_back(token{t_stack.top()});
+							t_stack.pop();
+						}
+						level--;
 						break;
 				}
 				break;
@@ -112,7 +146,28 @@ std::vector<aru::token> aru::solver::postfixify(std::vector<token>& tokens)
 	while(!t_stack.empty())
 	{
 		postfix.push_back(token{t_stack.top()});
+		switch(t_stack.top())
+		{
+			case '(':
+				level++;
+				break;
+
+			case ')':
+				level--;
+				break;
+		}
 		t_stack.pop();
+	}
+
+	if(level < 0)
+	{
+		fprintf(stderr, "%s: Extra ')'\n", program_invocation_name);
+		return {};
+	}
+	else if(level > 0)
+	{
+		fprintf(stderr, "%s: Extra '('\n", program_invocation_name);
+		return {};
 	}
 
 	return postfix;
