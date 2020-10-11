@@ -31,6 +31,25 @@ struct tokenizer
 	/// The operation string will be modified, and it must still exist after
 	/// split() returns.
 	void split(char* operation);
+
+private:
+	enum class state
+	{
+		before_operand,
+		begin_variable,
+		in_variable,
+		begin_literal,
+		in_literal,
+		before_operator,
+		end
+	};
+
+	state before_operand(char* input);
+	state begin_variable(char* input);
+	state in_variable(char* input);
+	state begin_literal(char* input);
+	state in_literal(char* input);
+	state before_operator(char* input);
 };
 
 };

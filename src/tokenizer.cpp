@@ -14,10 +14,90 @@
 // You should have received a copy of the GNU General Public License
 // along with osol.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <csignal>
+
 #include <tokenizer.hpp>
 
 void aru::tokenizer::split(char* operation)
 {
 	//TODO
 	tokens.push_back(token{operation});
+}
+
+aru::tokenizer::state aru::tokenizer::before_operand(char* input)
+{
+	if(!input)
+		raise(SIGSEGV);
+
+	switch(input[0])
+	{
+		default:
+			return state::end;
+			break;
+	}
+}
+
+aru::tokenizer::state aru::tokenizer::begin_variable(char* input)
+{
+	if(!input)
+		raise(SIGSEGV);
+
+	switch(input[0])
+	{
+		default:
+			return state::end;
+			break;
+	}
+}
+
+aru::tokenizer::state aru::tokenizer::in_variable(char* input)
+{
+	if(!input)
+		raise(SIGSEGV);
+
+	switch(input[0])
+	{
+		default:
+			return state::end;
+			break;
+	}
+}
+
+aru::tokenizer::state aru::tokenizer::begin_literal(char* input)
+{
+	if(!input)
+		raise(SIGSEGV);
+
+	switch(input[0])
+	{
+		default:
+			return state::end;
+			break;
+	}
+}
+
+aru::tokenizer::state aru::tokenizer::in_literal(char* input)
+{
+	if(!input)
+		raise(SIGSEGV);
+
+	switch(input[0])
+	{
+		default:
+			return state::end;
+			break;
+	}
+}
+
+aru::tokenizer::state aru::tokenizer::before_operator(char* input)
+{
+	if(!input)
+		raise(SIGSEGV);
+
+	switch(input[0])
+	{
+		default:
+			return state::end;
+			break;
+	}
 }
