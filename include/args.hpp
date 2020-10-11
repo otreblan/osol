@@ -54,6 +54,8 @@ private:
 		{"operation", required_argument, nullptr, 'o'},
 		{nullptr,     0,                 nullptr, 0}
 	};
+
+	bool solve(char* operation);
 };
 
 };

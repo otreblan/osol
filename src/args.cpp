@@ -29,6 +29,7 @@ int aru::args::parse(int argc, char** argv) noexcept
 
 	int c;
 	bool has_operation = false;
+	bool no_errors = true;
 
 	while((c = getopt_long(argc, argv, "-D:ho:", options, nullptr)) != -1)
 	{
@@ -44,7 +45,7 @@ int aru::args::parse(int argc, char** argv) noexcept
 
 			case 'o':
 			case 1:
-				tkn.split(optarg);
+				no_errors &= solve(optarg);
 				has_operation = true;
 				break;
 
@@ -56,29 +57,13 @@ int aru::args::parse(int argc, char** argv) noexcept
 
 	while(optind < argc)
 	{
-		tkn.split(argv[optind++]);
+		no_errors &= solve(argv[optind++]);
 		has_operation = true;
 	}
 
-	if(!has_operation)
+	if(!has_operation || !no_errors)
 	{
 		return usage(EXIT_FAILURE);
-	}
-
-	for(auto i: tkn.tokens)
-	{
-		switch(i.type)
-		{
-			case token_type::CHAR:
-				std::cerr << "char: " << i.value.c << '\n';
-				break;
-			case token_type::INT:
-				std::cerr << "int: " << i.value.i << '\n';
-				break;
-			case token_type::STRING:
-				std::cerr << "string: " << i.value.str_ref << '\n';
-				break;
-		}
 	}
 
 	return EXIT_SUCCESS;
@@ -121,4 +106,28 @@ void aru::args::parse_key_value(const char* key_value) noexcept
 	variables[name] = value;
 
 	free(name);
+}
+
+bool aru::args::solve(char* operation)
+{
+	tkn.tokens.clear();
+	tkn.split(operation);
+
+	for(auto i: tkn.tokens)
+	{
+		switch(i.type)
+		{
+			case token_type::CHAR:
+				std::cerr << "char: " << i.value.c << '\n';
+				break;
+			case token_type::INT:
+				std::cerr << "int: " << i.value.i << '\n';
+				break;
+			case token_type::STRING:
+				std::cerr << "string: " << i.value.str_ref << '\n';
+				break;
+		}
+	}
+
+	return true;
 }
