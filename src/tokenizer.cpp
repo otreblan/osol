@@ -25,14 +25,16 @@
 bool aru::tokenizer::split(char* operation)
 {
 	state current_state = state::before_operand;
+	size_t o_len = strlen(operation);
+	char* o_start = operation;
 
 	while(current_state != state::end)
-	{
 		current_state = next_state(operation++, current_state);
-	}
-	operation--;
 
-	if(*operation != '\0')
+	if(o_start + o_len != operation - 1 ||
+		tokens.empty() ||
+		!tokens.back().valid_ending()
+	)
 	{
 		fprintf(stderr, "%s: Bad operation.\n", program_invocation_name);
 		return false;

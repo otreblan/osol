@@ -17,6 +17,7 @@
 #include <cstdio>
 
 #include <token.hpp>
+#include <tokenizer.hpp>
 
 aru::token::token(char c):
 	type(token_type::CHAR)
@@ -52,4 +53,18 @@ void aru::token::print()
 			printf("string:\t%s\n", value.str_ref);
 			break;
 	}
+}
+
+bool aru::token::valid_ending()
+{
+	if(type == token_type::CHAR)
+	{
+		switch(value.c)
+		{
+			ARU_OPERATOR_CASES
+			case '(':
+				return false;
+		}
+	}
+	return true;
 }

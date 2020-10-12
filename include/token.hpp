@@ -42,6 +42,7 @@ struct token
 	explicit token(char* str_ref);
 
 	void print();
+	bool valid_ending();
 };
 
 };
