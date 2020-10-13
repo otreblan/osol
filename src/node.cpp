@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with osol.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <cmath>
 #include <new>
 #include <stack>
 
@@ -84,6 +85,9 @@ int aru::node::solve(std::unordered_map<std::string, int>& variables)
 
 				case '*':
 					return left->solve(variables) * right->solve(variables);
+
+				case '^':
+					return pow(left->solve(variables), right->solve(variables));
 
 				case '~':
 					return -(left->solve(variables));

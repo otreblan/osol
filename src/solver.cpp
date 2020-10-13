@@ -165,6 +165,9 @@ int aru::solver::precedence(char op)
 	switch(op)
 	{
 		case '~':
+			return 4;
+
+		case '^':
 			return 3;
 
 		case '*':

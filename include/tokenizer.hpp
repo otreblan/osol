@@ -98,7 +98,8 @@
 	case '-':\
 	case '+':\
 	case '*':\
-	case '/':
+	case '/':\
+	case '^':
 
 namespace aru
 {

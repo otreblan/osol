@@ -1,7 +1,7 @@
 # Maintainer: Otreblan <otreblain@gmail.com>
 
 pkgname=osol-git
-pkgver=1.0.0.r0.g1e41f58
+pkgver=1.0.1.r0.gdab06df
 pkgrel=1
 epoch=
 pkgdesc="Operation solver"
