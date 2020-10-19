@@ -91,6 +91,7 @@ std::vector<aru::token> aru::solver::postfixify(std::vector<token>& tokens)
 						}
 						while(!t_stack.empty() &&
 							t_stack.top() != '(' &&
+							t.value.c != '~' &&
 							precedence(t_stack.top()) >= precedence(t.value.c)
 						)
 						{

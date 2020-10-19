@@ -57,6 +57,7 @@ aru::tokenizer::state aru::tokenizer::before_operand(char* input)
 			tokens.push_back(token{input[0]});
 			[[fallthrough]];
 		case ' ':
+		case '+':
 			input[0] = '\0';
 			return state::before_operand;
 

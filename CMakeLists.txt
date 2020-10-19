@@ -17,7 +17,7 @@
 cmake_minimum_required(VERSION 3.13.0)
 
 project(osol
-	VERSION 1.0.2
+	VERSION 1.1.0
 	DESCRIPTION "Operation solver"
 	HOMEPAGE_URL "https://github.com/utec-ads-2020-2/operations-solver-otreblan"
 )
