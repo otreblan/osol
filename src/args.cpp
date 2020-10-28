@@ -70,6 +70,11 @@ int aru::args::parse(int argc, char** argv) noexcept
 	return EXIT_SUCCESS;
 }
 
+/**
+ * Está muy genial la manera en la que lo hiciste para poder usarse desde la terminal, pero no consideraste 
+ * sistemas operativos como BSD o Mac (program_invocation_name no existe en Mac), tuve que probarlo en mi linux.
+ * De todas formas solo es una observación fuera del proyecto pero obvio que nada que ver con tu nota.
+ */
 int aru::args::usage(int exit_code) const noexcept
 {
 	printf(
@@ -80,7 +85,7 @@ int aru::args::usage(int exit_code) const noexcept
 		"\t-h, --help                  Display help.\n"
 		"\t-D, --define key=value      Set value to a key.\n"
 		"\t-o, --operation \"operation\" Operation to solve.\n",
-		program_invocation_name
+		program_invocation_name 
 	);
 
 	return exit_code;

@@ -16,6 +16,15 @@
 
 #include <args.hpp>
 
+/**
+ * Solo consideras respuestas enteras. Quizás el efecto en las respuestas es porque no consideras decimales
+ * 
+ * 7/4*((3+1)*3)+5 La respuesta correcta es 26
+ * 7/3*((2+-8)*6)+3 La respuesta correcta es 81
+ * ((14-45/16*130-(182^2-15*12))) La respuesta correcta es -33295.625
+ * 1231-92*2*(5^2)+(412/5*3) La respuesta correcta es -3121.8 
+*/
+
 int main(int argc, char *argv[])
 {
 	aru::args args;
